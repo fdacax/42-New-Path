@@ -1,4 +1,5 @@
 #	====================		Make		====================
+MAKEFLAGS += -s
 
 NAME = libft.a
 
@@ -7,9 +8,10 @@ USER = fedacax
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror
+AR = ar rcs
 RM = rm -rf
 
-SRCS = $(wildcard *.c)
+SRCS = $(shell find . -name "*.c")
 OBJS = $(SRCS:.c=.o)
 
 #	====================		Colors		====================
@@ -41,7 +43,7 @@ LOOP = 9
 endif
 
 define run_spin
-	@i=0; \
+	i=0; \
 	while [ $$i -lt $(LOOP) ]; do \
 		SPIN_CHAR=$$(printf '%s\n' $(SPIN) | sed -n "$$(( (i % 10) + 1 ))p"); \
 		printf "\r\033[K$(CYAN)$$SPIN_CHAR$(RESET) $(1)"; \
@@ -54,38 +56,38 @@ endef
 #	====================		Header		====================
 
 define print_header
-	@printf "   $(CYAN)/* ********************************************************************* */$(RESET)\n"
-	@printf "   $(CYAN)/*                                                                       */$(RESET)\n"
-	@printf "   $(CYAN)/*                           $(PROJECT) by: $(USER)                           */$(RESET)\n"
-	@printf "   $(CYAN)/*                                                                       */$(RESET)\n"
-	@printf "   $(CYAN)/*            :::      ::::::::    :::::::::  :::::::::::  :::::::::     */$(RESET)\n"
-	@printf "   $(CYAN)/*          :+:      :+:    :+:   :+:     :+: :+:     :+: :+:     :+:    */$(RESET)\n"
-	@printf "   $(CYAN)/*        +:+ +:+         +:+     +:+     +:+ +:+     +:+ +:+     +:+    */$(RESET)\n"
-	@printf "   $(CYAN)/*      +#+  +:+       +#+        +#+     +:+ +#+#+#+#+#+ +#+     +:+    */$(RESET)\n"
-	@printf "   $(CYAN)/*    +#+#+#+#+#+   +#+           +#+     +#+ +#+         +#+     +#+    */$(RESET)\n"
-	@printf "   $(CYAN)/*         #+#    #+#             #+#     #+# #+#         #+#     #+#    */$(RESET)\n"
-	@printf "   $(CYAN)/*        ###   ########           #########  ###          #########     */$(RESET)\n"
-	@printf "   $(CYAN)/*                                                                       */$(RESET)\n"
-	@printf "   $(CYAN)/* ********************************************************************* */$(RESET)\n"
-	@printf "\n"
+	printf "   $(CYAN)/* ********************************************************************* */$(RESET)\n"
+	printf "   $(CYAN)/*                                                                       */$(RESET)\n"
+	printf "   $(CYAN)/*                           $(PROJECT) by: $(USER)                           */$(RESET)\n"
+	printf "   $(CYAN)/*                                                                       */$(RESET)\n"
+	printf "   $(CYAN)/*            :::      ::::::::    :::::::::  :::::::::::  :::::::::     */$(RESET)\n"
+	printf "   $(CYAN)/*          :+:      :+:    :+:   :+:     :+: :+:     :+: :+:     :+:    */$(RESET)\n"
+	printf "   $(CYAN)/*        +:+ +:+         +:+     +:+     +:+ +:+     +:+ +:+     +:+    */$(RESET)\n"
+	printf "   $(CYAN)/*      +#+  +:+       +#+        +#+     +:+ +#+#+#+#+#+ +#+     +:+    */$(RESET)\n"
+	printf "   $(CYAN)/*    +#+#+#+#+#+   +#+           +#+     +#+ +#+         +#+     +#+    */$(RESET)\n"
+	printf "   $(CYAN)/*         #+#    #+#             #+#     #+# #+#         #+#     #+#    */$(RESET)\n"
+	printf "   $(CYAN)/*        ###   ########           #########  ###          #########     */$(RESET)\n"
+	printf "   $(CYAN)/*                                                                       */$(RESET)\n"
+	printf "   $(CYAN)/* ********************************************************************* */$(RESET)\n"
+	printf "\n"
 endef
 
 #	====================		Help		====================
 
 define print_help
-	@echo "  $(BOLD)$(CYAN)╔══════════════════════════════════╗$(RESET)"
-	@echo "  $(BOLD)$(CYAN)║            $(PROJECT) - help          ║$(RESET)"
-	@echo "  $(BOLD)$(CYAN)╚══════════════════════════════════╝$(RESET)"
-	@echo "  $(B_GREEN)make$(RESET)          $(B_YELLOW)→$(RESET) build $(NAME)"
-	@echo "  $(B_GREEN)make bonus$(RESET)    $(B_YELLOW)→$(RESET) build with bonus files"
-	@echo "  $(B_GREEN)make clean$(RESET)    $(B_YELLOW)→$(RESET) remove object files"
-	@echo "  $(B_GREEN)make fclean$(RESET)   $(B_YELLOW)→$(RESET) remove objects and $(NAME)"
-	@echo "  $(B_GREEN)make re$(RESET)       $(B_YELLOW)→$(RESET) fclean + build"
-	@echo "  $(B_GREEN)make norm$(RESET)     $(B_YELLOW)→$(RESET) run Norminette"
-	@echo "  $(B_RED)make val$(RESET)      $(B_YELLOW)→$(RESET) run Valgrind"
-	@echo "  $(B_RED)make debug$(RESET)    $(B_YELLOW)→$(RESET) build with debug flags"
-	@echo "  $(B_GREEN)make help$(RESET)     $(B_YELLOW)→$(RESET) show this message"
-	@echo ""
+	printf "  $(BOLD)$(CYAN)╔══════════════════════════════════╗$(RESET)\n"
+	printf "  $(BOLD)$(CYAN)║            $(PROJECT) - help          ║$(RESET)\n"
+	printf "  $(BOLD)$(CYAN)╚══════════════════════════════════╝$(RESET)\n"
+	printf "  $(B_GREEN)make$(RESET)          $(B_YELLOW)→$(RESET) build $(NAME)\n"
+	printf "  $(B_GREEN)make bonus$(RESET)    $(B_YELLOW)→$(RESET) build with bonus files\n"
+	printf "  $(B_GREEN)make clean$(RESET)    $(B_YELLOW)→$(RESET) remove object files\n"
+	printf "  $(B_GREEN)make fclean$(RESET)   $(B_YELLOW)→$(RESET) remove objects and $(NAME)\n"
+	printf "  $(B_GREEN)make re$(RESET)       $(B_YELLOW)→$(RESET) fclean + build\n"
+	printf "  $(B_GREEN)make norm$(RESET)     $(B_YELLOW)→$(RESET) run Norminette\n"
+	printf "  $(B_RED)make val$(RESET)      $(B_YELLOW)→$(RESET) run Valgrind\n"
+	printf "  $(B_RED)make debug$(RESET)    $(B_YELLOW)→$(RESET) build with debug flags\n"
+	printf "  $(B_GREEN)make help$(RESET)     $(B_YELLOW)→$(RESET) show this message\n"
+	printf "\n"
 endef
 
 #	====================		Rules		====================
@@ -93,35 +95,35 @@ endef
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	@ar rcs $(NAME) $(OBJS)
-	@clear
-	@$(call print_header)
-	@$(call run_spin, Compiling source files)
-	@$(call run_spin, Creating library $(NAME))
+	$(AR) $(NAME) $(OBJS)
+	clear
+	$(call print_header)
+	$(call run_spin, Compiling source files)
+	$(call run_spin, Creating library $(NAME))
 
 %.o: %.c libft.h
-	@$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	@$(RM) $(OBJS)
-	@$(call run_spin, Removing object files)
+	$(RM) $(OBJS)
+	$(call run_spin, Removing object files)
 
 fclean:
-	@$(RM) $(NAME) $(OBJS)
-	@$(call run_spin, Cleaning)
+	$(RM) $(NAME) $(OBJS)
+	$(call run_spin, Cleaning)
 
 bonus: all
 
 re: fclean all
 
 norm:
-	@norminette $(SRCS) *.h
+	norminette $(SRCS) *.h
 
 help:
 	clear
-	@$(call print_help)
+	$(call print_help)
 
 test:re
-	@$(CC) $(FLAGS) main.c $(NAME)
+	$(CC) $(FLAGS) main.c $(NAME)
 
 .PHONY: all bonus clean fclean re norm
